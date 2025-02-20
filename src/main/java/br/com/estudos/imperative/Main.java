@@ -1,40 +1,39 @@
-package imperative;
+package br.com.estudos.imperative;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static imperative.Main.Gender.*;
+import static br.com.estudos.imperative.Main.Gender.FEMALE;
+import static br.com.estudos.imperative.Main.Gender.MALE;
 
 public class Main {
     public static void main(String[] args) {
         List<Person> people = List.of(
-                new Person("John", MALE),
-                new Person("Maria", FEMALE),
-                new Person("Aisha", FEMALE),
-                new Person("Alex", MALE),
-                new Person("Alice", FEMALE)
+            new Person("John", MALE),
+            new Person("Maria", FEMALE),
+            new Person("Aisha", FEMALE),
+            new Person("Alex", MALE),
+            new Person("Alice", FEMALE)
         );
 
-        System.out.println("// Imperative approach");
-        // Imperative approach
+        //IMPERATIVE
+        System.out.println("// IMPERATIVE");
         List<Person> females = new ArrayList<>();
-
-        for (Person person : people) {
-            if (FEMALE.equals(person.gender)) {
+        for(Person person: people) {
+            if(FEMALE.equals(person.gender)) {
                 females.add(person);
             }
         }
 
-        for (Person female : females) {
+        for (Person female: females) {
             System.out.println(female);
         }
 
-        System.out.println("// Declarative approach");
-        // Declarative approach
+        //DECLARATIVE
+        System.out.println("// DECLARATIVE");
         Predicate<Person> personPredicate = person -> FEMALE.equals(person.gender);
-
         List<Person> females2 = people.stream()
                 .filter(personPredicate)
                 .collect(Collectors.toList());
@@ -45,7 +44,7 @@ public class Main {
         private final String name;
         private final Gender gender;
 
-        Person(String name, Gender gender) {
+        public Person(String name, Gender gender) {
             this.name = name;
             this.gender = gender;
         }
